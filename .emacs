@@ -43,11 +43,12 @@
      ("org" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/"))))
  '(package-selected-packages
    (quote
-    (javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis nginx-mode dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
+    (tabbar session javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis 
+nginx-mode 
+dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
  '(session-use-package t nil (session))
  '(tool-bar-mode nil)
- '(wakatime-api-key "537f1330-b032-425a-ba86-7e8280074df3")
- '(wakatime-cli-path "/usr/local/lib/python2.7/site-packages/wakatime/cli.py"))
+ '(wakatime-api-key "537f1330-b032-425a-ba86-7e8280074df3"))
 ;; custom set faces
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -69,24 +70,32 @@
 (setq gnus-inhibit-startup-message t)
 
 ;; start wakatime
+(setq wakatime-cli-path "/usr/local/lib/python2.7/site-packages/wakatime/cli.py")
+(if (eq system-type 'windows-nt)
+    (setq wakatime-cli-path "C:/Users/qinka/AppData/Local/Programs/Python/Python35-32/Scripts/wakatime.exe"))
 (global-wakatime-mode)
+    
 
-;; setting up Multi-Term
+;; setting up Multi-Term 
 (require 'multi-term)
 (setq multi-term-program "/bin/zsh")
+;; Windows
+(if (eq system-type 'windows-nt)
+      (setq multi-term-program "start C:/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe"))
 (add-hook 'term-mode-hook
           (lambda ()
             (setq term-buffer-maximum-size 0)))
 (add-hook 'term-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)
-            (autopair-mode -1)))
+            (autopair-mode -1))) 
 
 ;; Start a new term
 (global-set-key (kbd "<f7> t")       'multi-term)
 (global-set-key (kbd "<f7> <right>") 'multi-term-prev)
 (global-set-key (kbd "<f7> <right>") 'multi-term-next)
-(multi-term)
+(if (not (eq system-type 'windows-nt))
+    (multi-term))
 
 
 ;; Setting up time and display
@@ -146,7 +155,8 @@
 (scroll-bar-mode)
 
 ;; font
-(set-default-font "Monaco-18")
+(if (eq system-type 'darwin)
+    (set-default-font "Monaco-18"))
 
 ;; haskell
 ;; ghc-mode
@@ -221,3 +231,9 @@
 	  (lambda ()
 	    (multi-term-handle-close)))
 	  
+;; in windows gc do not work as we wish
+(when (eq system-type 'windows-nt)
+    (setq gc-cons-threshold (* 512 1024 1024))
+    (setq gc-cons-percentage 0.5)
+    (run-with-idle-timer 5 t #'garbage-collect)
+)
