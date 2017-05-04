@@ -92,7 +92,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 
 ;; Start a new term
 (global-set-key (kbd "<f7> t")       'multi-term)
-(global-set-key (kbd "<f7> <right>") 'multi-term-prev)
+(global-set-key (kbd "<f7> <left>" ) 'multi-term-prev)
 (global-set-key (kbd "<f7> <right>") 'multi-term-next)
 (if (not (eq system-type 'windows-nt))
     (multi-term))
