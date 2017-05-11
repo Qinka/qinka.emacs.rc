@@ -90,7 +90,7 @@
 
 ;; Start a new term
 (global-set-key (kbd "<f7> t")       'multi-term)
-(global-set-key (kbd "<f7> <right>") 'multi-term-prev)
+(global-set-key (kbd "<f7> <left>" ) 'multi-term-prev)
 (global-set-key (kbd "<f7> <right>") 'multi-term-next)
 (when (not (eq system-type 'windows-nt))
     (multi-term))
