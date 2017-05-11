@@ -136,7 +136,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 (global-set-key (kbd "<f8> t") 'tabbar-add-tab)
 (global-set-key (kbd "<f8> w") 'tabbar-delete-tab)
 ;; close default tabs，and move all files into one group
-(setq *tabbar-ignore-buffers* '(" *Echo Area" " *code-conversion-work" " *Minibuf-" "*scratch*" "*Messages*" "*Ibuffer" " *Completions" "idle.org" ".bbdb" "diary" " *WakaTime"))
+(setq *tabbar-ignore-buffers* '(" tmp" " ghc-mode:" " *Echo Area" " *code-conversion-work" " *Minibuf-" "*scratch*" "*Messages*" "*Ibuffer" " *Completions" "idle.org" ".bbdb" "diary" " *WakaTime"))
 (setq tabbar-buffer-list-function
       (lambda ()
 	(remove-if
