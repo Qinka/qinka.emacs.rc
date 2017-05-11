@@ -43,9 +43,7 @@
      ("org" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/"))))
  '(package-selected-packages
    (quote
-    (tabbar session javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis 
-nginx-mode 
-dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
+    (tabbar session javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis nginx-mode dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
  '(session-use-package t nil (session))
  '(tool-bar-mode nil)
  '(wakatime-api-key "537f1330-b032-425a-ba86-7e8280074df3"))
@@ -71,7 +69,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 
 ;; start wakatime
 (setq wakatime-cli-path "/usr/local/lib/python2.7/site-packages/wakatime/cli.py")
-(if (eq system-type 'windows-nt)
+(when (eq system-type 'windows-nt)
     (setq wakatime-cli-path "C:/Users/qinka/AppData/Local/Programs/Python/Python35-32/Scripts/wakatime.exe"))
 (global-wakatime-mode)
     
@@ -80,7 +78,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 (require 'multi-term)
 (setq multi-term-program "/bin/zsh")
 ;; Windows
-(if (eq system-type 'windows-nt)
+(when (eq system-type 'windows-nt)
       (setq multi-term-program "start C:/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe"))
 (add-hook 'term-mode-hook
           (lambda ()
@@ -94,7 +92,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 (global-set-key (kbd "<f7> t")       'multi-term)
 (global-set-key (kbd "<f7> <left>" ) 'multi-term-prev)
 (global-set-key (kbd "<f7> <right>") 'multi-term-next)
-(if (not (eq system-type 'windows-nt))
+(when (not (eq system-type 'windows-nt))
     (multi-term))
 
 
@@ -155,8 +153,10 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
 (scroll-bar-mode)
 
 ;; font
-(if (eq system-type 'darwin)
+(when (eq system-type 'darwin)
     (set-default-font "Monaco-18"))
+(when (eq system-type 'windows-nt)
+    (set-default-font "Monaco-16"))
 
 ;; haskell
 ;; ghc-mode
@@ -237,3 +237,7 @@ dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-
     (setq gc-cons-percentage 0.5)
     (run-with-idle-timer 5 t #'garbage-collect)
 )
+
+
+;; Auto reopen
+(global-auto-revert-mode t)
