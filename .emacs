@@ -43,7 +43,7 @@
      ("org" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/"))))
  '(package-selected-packages
    (quote
-    (tabbar session javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis nginx-mode dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
+    (windresize winner-mode-enable tabbar session javap-mode color-theme-modern base16-theme ghc-imported-from intero haskell-emacs-text haskell-emacs-base haskell-emacs javaimp travis nginx-mode dockerfile-mode docker github-issues git powershell haml-mode hamlet-mode latex-extra markdown-preview-mode palette yaml-mode js3-mode markdown-mode maker-mode company-shell autopair multi-term wakatime-mode atom-one-dark-theme color-theme rainbow-delimiters hindent auctex mmm-mode ghc company-ghc haskell-mode)))
  '(session-use-package t nil (session))
  '(tool-bar-mode nil)
  '(wakatime-api-key "537f1330-b032-425a-ba86-7e8280074df3"))
@@ -134,7 +134,7 @@
 (global-set-key (kbd "<f8> t") 'tabbar-add-tab)
 (global-set-key (kbd "<f8> w") 'tabbar-delete-tab)
 ;; close default tabs，and move all files into one group
-(setq *tabbar-ignore-buffers* '(" tmp" " ghc-mode:" " *Echo Area" " *code-conversion-work" " *Minibuf-" "*scratch*" "*Messages*" "*Ibuffer" " *Completions" "idle.org" ".bbdb" "diary" " *WakaTime"))
+(setq *tabbar-ignore-buffers* '(" tmp" " ghc-mode:" " *Echo Area" " *code-conversion-work" " *Minibuf-" "*scratch*" "*Messages*" "*Ibuffer" "*Complet" " *Completions" "idle.org" ".bbdb" "diary" " *WakaTime" " ghc-mod:" "*GHC Error*" " *code-conv" " intero:" "*Flycheck" " *Flycheck"))
 (setq tabbar-buffer-list-function
       (lambda ()
 	(remove-if
@@ -154,9 +154,9 @@
 
 ;; font
 (when (eq system-type 'darwin)
-    (set-default-font "Monaco-18"))
+    (set-default-font "Monaco-12"))
 (when (eq system-type 'windows-nt)
-    (set-default-font "Monaco-16"))
+    (set-default-font "Monaco-12"))
 
 ;; haskell
 ;; ghc-mode
@@ -212,6 +212,7 @@
 (setq mmm-submode-decoration-level 0)
 ;; Intero Settings
 (add-hook 'haskell-mode 'intero-mode)
+(intero-global-mode 1)
 
 ;; rainbow-delimiters
 (require 'rainbow-delimiters)
